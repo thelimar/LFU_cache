@@ -35,7 +35,7 @@ public:
 	}
 
 	template <typename F>
-	bool lookup_update (KeyT key, F slow_get_page)  //checks for element in cache; calls slow_get_page if failure
+	bool lookup_update (KeyT key, F slow_get_page) //checks for element in cache; calls slow_get_page if failure
 	{
 		auto hit = hash_.find (key);
 
@@ -71,7 +71,8 @@ public:
 		return lfu_element;
 	}
 
-	void dump ()
+	void dump () const
+
 	{
 		for  (auto i = cache_.begin (); i != cache_.end (); i++)
 			std::cout << i->cache_element_.id_ << " (" << i->frequency_ << ")   ";
@@ -80,7 +81,7 @@ public:
 	}
 
 	template <typename F>
-	int vanga_cache (KeyT* elements, int n_elements, F slow_get_page) //ideal cache algorithm
+	int vanga_cache (KeyT* elements, size_t n_elements, F slow_get_page) //ideal cache algorithm
 	{
 		int hits = 0;
 
@@ -120,7 +121,7 @@ public:
 		return hits;
 	}
 
-	int check_distance (KeyT* elements, int n_elements, ListIt cache_unit) //returns distance to next occurance of element in elements
+	int check_distance (KeyT* elements, size_t n_elements, ListIt cache_unit) const //returns distance to next occurance of element in elements
 	{
 		int distance = 0;
 
